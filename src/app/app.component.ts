@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {Post} from "./entities/Post";
+import {Post} from "./models/post.model";
+import {environment} from "../environments/environment";
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -7,21 +9,17 @@ import {Post} from "./entities/Post";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  posts: Post [] = [
-    new Post(
-      'Mon premier post',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at finibus neque. Curabitur non lectus placerat, tempor felis sit amet, molestie arcu. Morbi hendrerit ante luctus, luctus urna in, rutrum leo. Suspendisse tristique faucibus feugiat. In malesuada neque a dolor convallis, ut ullamcorper augue vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque efficitur sodales metus, ac mollis lectus porta sit amet.',
-      3
-    ),
-    new Post(
-      'Mon deuxième post',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at finibus neque. Curabitur non lectus placerat, tempor felis sit amet, molestie arcu. Morbi hendrerit ante luctus, luctus urna in, rutrum leo. Suspendisse tristique faucibus feugiat. In malesuada neque a dolor convallis, ut ullamcorper augue vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque efficitur sodales metus, ac mollis lectus porta sit amet.',
-      -3
-    ),
-    new Post(
-      'Mon troisième post',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at finibus neque. Curabitur non lectus placerat, tempor felis sit amet, molestie arcu. Morbi hendrerit ante luctus, luctus urna in, rutrum leo. Suspendisse tristique faucibus feugiat. In malesuada neque a dolor convallis, ut ullamcorper augue vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque efficitur sodales metus, ac mollis lectus porta sit amet.',
-      0
-    ),
-  ]
+
+  constructor() {
+    const config = {
+      apiKey: environment.API_KEY,
+      authDomain: environment.AUTH_DOMAIN,
+      databaseURL: environment.DATABASE_URL,
+      projectId: environment.PROJECT_ID,
+      storageBucket: environment.STORAGE_BUCKET,
+      messagingSenderId: environment.MESSAGING_SENDER_ID,
+      appId: environment.APP_ID
+    };
+    firebase.initializeApp(config);
+  }
 }
