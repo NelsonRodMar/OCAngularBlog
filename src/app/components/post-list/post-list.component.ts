@@ -20,12 +20,12 @@ export class PostListComponent implements OnInit {
     this.postsSubscription = this.postsService.postsSubject.subscribe(
       (posts: Post[]) => {
         this.posts = posts;
-        this.postsService.emitPosts();
-        if (this.posts.length == 0) {
-          this.router.navigate(['/new-post']);
-        }
       }
     );
+    this.postsService.emitPosts();
+    if (this.posts.length == 0) {
+      this.router.navigate(['/new-post']);
+    }
   }
 
   moreLove(post: Post){
